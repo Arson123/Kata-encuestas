@@ -238,9 +238,3 @@ npm run typeorm -- -h  # ayuda del CLI
 * (Opcional) Anonimización de export si fuese necesario.
 
 ---
-
-## 📄 Licencia
-
-Uso interno / educativo. Ajusta según tus necesidades.
-
----

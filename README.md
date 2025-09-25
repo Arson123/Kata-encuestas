@@ -1,4 +1,3 @@
-¡de una! Aquí tienes el **README compacto** con los **diagramas embebidos como imágenes** directamente en el documento (usando HTML para asegurar el render y tamaño en GitHub). Solo incluye lo esencial de instalación/arranque y flujo.
 
 ---
 

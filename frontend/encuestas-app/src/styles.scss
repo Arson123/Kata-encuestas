@@ -1,0 +1,10 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$theme: mat.define-theme();
+
+@include mat.all-component-themes($theme);
+
+/* tus estilos globales desde aquí hacia abajo */
+html, body { height: 100%; margin: 0; }

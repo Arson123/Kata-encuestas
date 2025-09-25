@@ -1,0 +1,15 @@
+.wrap {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+.card {
+  display: grid;
+  gap: 12px;
+}
+.table {
+  width: 100%;
+}
+.empty {
+  color: #777;
+}

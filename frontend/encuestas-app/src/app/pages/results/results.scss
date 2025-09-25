@@ -1,0 +1,46 @@
+.wrap {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+.card {
+  display: grid;
+  gap: 12px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.kpi {
+  background: #f7f7f7;
+  border-radius: 8px;
+  padding: 12px;
+}
+.k {
+  color: #666;
+  font-size: 0.9rem;
+}
+.v {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.perq {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.qid {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  color: #444;
+}
+.table {
+  width: 100%;
+}
+.list {
+  margin: 0;
+  padding-left: 18px;
+}
+.muted {
+  color: #777;
+}

@@ -1,0 +1,42 @@
+.wrap {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+.card {
+  display: grid;
+  gap: 12px;
+}
+.form {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: end;
+}
+@media (max-width: 800px) {
+  .form {
+    grid-template-columns: 1fr;
+  }
+}
+.table {
+  width: 100%;
+}
+.actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.chip {
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: #eee;
+  font-size: 0.85rem;
+}
+.chip.pub {
+  background: #e3f2fd;
+  color: #0d47a1;
+}
+.empty {
+  padding: 8px;
+  color: #777;
+}

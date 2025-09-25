@@ -1,0 +1,46 @@
+<div class="wrap">
+  <mat-card class="card">
+    <h2>{{ title }}</h2>
+    <div class="muted">Responde la encuesta</div>
+  </mat-card>
+
+  <mat-card class="card" *ngFor="let q of questions">
+    <div class="q-title">{{ q.title }}</div>
+
+    <ng-container [ngSwitch]="q.type">
+      <div *ngSwitchCase="'SCALE'" class="scale">
+        <mat-slider
+          [min]="q.scaleMin"
+          [max]="q.scaleMax"
+          [step]="1"
+          discrete
+          showTickMarks
+          [formControl]="control(q.id)"
+        >
+        </mat-slider>
+        <div class="scale-values">
+          <span>{{ q.scaleMin }}</span>
+          <span>{{ value(q.id) ?? '' }}</span>
+          <span>{{ q.scaleMax }}</span>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'SINGLE'">
+        <mat-radio-group [formControl]="control(q.id)">
+          <mat-radio-button *ngFor="let o of q.options" [value]="o.id">{{
+            o.label
+          }}</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </ng-container>
+  </mat-card>
+
+  <button mat-flat-button color="primary" class="send" (click)="submit()" [disabled]="loading()">
+    {{ loading() ? 'Enviando…' : 'Enviar' }}
+  </button>
+
+  <mat-card class="ok" *ngIf="responseId()">
+    <div>Respuesta registrada</div>
+    <div class="muted">ID: {{ responseId() }}</div>
+  </mat-card>
+</div>

@@ -1,0 +1,121 @@
+<div class="wrap" *ngIf="survey">
+  <mat-card class="card">
+    <div class="head">
+      <div>
+        <h2>{{ survey.title }}</h2>
+        <div class="muted">{{ survey.description }}</div>
+      </div>
+      <div class="actions">
+        <span class="chip" [class.pub]="survey.status === 'PUBLISHED'">{{ survey.status }}</span>
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="publish()"
+          [disabled]="survey.status === 'PUBLISHED'"
+        >
+          {{ survey.status === 'PUBLISHED' ? 'Publicado' : 'Publicar' }}
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="card">
+    <h3>Preguntas</h3>
+    <table mat-table [dataSource]="questions" class="table">
+      <ng-container matColumnDef="order">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let q">{{ q.order || '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td mat-cell *matCellDef="let q">{{ q.type }}</td>
+      </ng-container>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Título</th>
+        <td mat-cell *matCellDef="let q">{{ q.title }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let q">
+          <div *ngIf="q.type === 'SINGLE'">
+            <table mat-table [dataSource]="opts(q.id)" class="opt-table">
+              <ng-container matColumnDef="order">
+                <th mat-header-cell *matHeaderCellDef>#</th>
+                <td mat-cell *matCellDef="let o">{{ o.order }}</td>
+              </ng-container>
+              <ng-container matColumnDef="label">
+                <th mat-header-cell *matHeaderCellDef>Label</th>
+                <td mat-cell *matCellDef="let o">{{ o.label }}</td>
+              </ng-container>
+              <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef>Value</th>
+                <td mat-cell *matCellDef="let o">{{ o.value }}</td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="['order', 'label', 'value']"></tr>
+              <tr mat-row *matRowDef="let r; columns: ['order', 'label', 'value']"></tr>
+            </table>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let r; columns: displayedColumns"></tr>
+    </table>
+    <div *ngIf="!questions?.length" class="empty">Sin preguntas.</div>
+  </mat-card>
+
+  <mat-card class="card">
+    <h3>Nueva pregunta SCALE</h3>
+    <form [formGroup]="scaleForm" (ngSubmit)="addScale()" class="grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Título</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Mín</mat-label>
+        <input matInput type="number" formControlName="scaleMin" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Máx</mat-label>
+        <input matInput type="number" formControlName="scaleMax" />
+      </mat-form-field>
+      <button mat-flat-button color="primary">Agregar</button>
+    </form>
+  </mat-card>
+
+  <mat-card class="card">
+    <h3>Nueva pregunta SINGLE</h3>
+    <form [formGroup]="singleForm" (ngSubmit)="addSingle()" class="grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Título</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+      <button mat-flat-button color="primary">Agregar</button>
+    </form>
+  </mat-card>
+
+  <mat-card class="card">
+    <h3>Agregar opción a SINGLE</h3>
+    <form [formGroup]="optionForm" (ngSubmit)="addOption()" class="grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Pregunta SINGLE (ID)</mat-label>
+        <input matInput formControlName="questionId" placeholder="ID de pregunta" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Orden</mat-label>
+        <input matInput type="number" formControlName="order" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Label</mat-label>
+        <input matInput formControlName="label" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Value</mat-label>
+        <input matInput formControlName="value" />
+      </mat-form-field>
+      <button mat-flat-button color="primary">Agregar opción</button>
+    </form>
+    <div class="muted">
+      Tip: el ID lo ves en el listado de preguntas de esta misma página, o desde la API.
+    </div>
+  </mat-card>
+</div>

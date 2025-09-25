@@ -1,0 +1,48 @@
+<div class="login-wrap">
+  <mat-card class="login-card">
+    <h1>Iniciar sesión</h1>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" autocomplete="email" />
+        <mat-error *ngIf="form.controls.email.hasError('required')">Requerido</mat-error>
+        <mat-error *ngIf="form.controls.email.hasError('email')">Email inválido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input
+          matInput
+          [type]="hide() ? 'password' : 'text'"
+          formControlName="password"
+          autocomplete="current-password"
+        />
+        <button
+          mat-icon-button
+          type="button"
+          matSuffix
+          (click)="hide.set(!hide())"
+          aria-label="Mostrar/Ocultar contraseña"
+        >
+          <mat-icon>{{ hide() ? 'visibility' : 'visibility_off' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="form.controls.password.hasError('required')">Requerida</mat-error>
+        <mat-error *ngIf="form.controls.password.hasError('minlength')"
+          >Mínimo 6 caracteres</mat-error
+        >
+      </mat-form-field>
+
+      <div class="api-error" *ngIf="apiError()">{{ apiError() }}</div>
+
+      <button mat-flat-button color="primary" class="w-100" [disabled]="form.invalid || loading()">
+        {{ loading() ? 'Entrando…' : 'Entrar' }}
+      </button>
+    </form>
+
+    <div class="alt">
+      ¿No tienes cuenta?
+      <a routerLink="/register">Crear usuario</a>
+    </div>
+  </mat-card>
+</div>

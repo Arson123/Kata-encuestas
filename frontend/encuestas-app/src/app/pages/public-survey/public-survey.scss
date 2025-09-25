@@ -1,0 +1,33 @@
+.wrap {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+.card {
+  display: grid;
+  gap: 8px;
+}
+.q-title {
+  font-weight: 600;
+}
+.scale {
+  display: grid;
+  gap: 6px;
+}
+.scale-values {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+}
+.send {
+  margin: 0 16px 16px;
+  width: max-content;
+}
+.ok {
+  color: #1b5e20;
+  border-left: 4px solid #1b5e20;
+  padding-left: 12px;
+}
+.muted {
+  color: #666;
+}
